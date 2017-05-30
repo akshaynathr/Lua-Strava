@@ -11,11 +11,14 @@ before_install:
       - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
       - sudo apt-get update -q
       - sudo apt-get install gcc-4.8 -y
+      - sudo apt-get install libssl-dev -y
+      - sudo apt-get install m4 -y
       - pip install hererocks
       - hererocks lua_install -r^ --$LUA
       - export PATH=$PATH:$PWD/lua_install/bin
       - luarocks install luacheck
       - luarocks install luacov
+      - luarocks install http
     #  - luarocks install luacov-coveralls
 install: true
     # - luarock
