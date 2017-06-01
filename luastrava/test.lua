@@ -20,6 +20,18 @@ function TestApiV3:Test_request()
 
 end
 
+function TestApiV3:Test_resolve_url()
+
+   local newApiV3=protocol:new({access_token=1234324,requests_session='123', rate_limiter='aaa' })
+
+   local url=newApiV3:_resolve_url('/akshay/12',true)
+
+   print("Resolved url" .. url)
+
+   luaunit.assertStrContains(url,'/akshay/12')
+
+end
+
 
 function TestApiV3:Test_authorization_url()
 
