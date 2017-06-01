@@ -22,7 +22,8 @@ before_install:
     #  - luarocks install luacov-coveralls
 install: true
     # - luarock
-script: true
+script: 
+      - lua luastrava/test.lua -o TAP
 # Don't fail due to luacheck
 #- sh test.sh
 
