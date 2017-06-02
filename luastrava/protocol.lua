@@ -33,7 +33,9 @@ function ApiV3:authorization_url(client_id,redirect_uri,approval_prompt,scope,st
         response_type='code'
 
         }
-    scope=table.concat(scope,',')
+    if type(scope)=='table' then 
+        scope=table.concat(scope,',')
+    end
 
     
        
@@ -47,11 +49,15 @@ function ApiV3:authorization_url(client_id,redirect_uri,approval_prompt,scope,st
 
     end
 
-    return 'https://' .. self.server .. '/oauth/authorize/' .. encode.table(params)
+    return 'https://' .. self.server .. '/oauth/authorize?' .. encode.table(params)
 end
 
 function ApiV3:exchange_code_for_token(client_id,client_secret,code)
-    
+   response= self._request('https://'..  self.server ..'/oauth/token',{client_id=client_id,client_secret=client_secret,code=code},'POST')
+   token=responese['access_token']
+   self.access_token=token
+
+   return token
 
 end
 
@@ -64,7 +70,7 @@ function ApiV3:_resolve_url(url,use_webhook_server)
 
 end
 
-function ApiV3:_request(url,params,files,method,check_for_errors,use_webhook_server)
+function ApiV3:_request(url,params,method,files,check_for_errors,use_webhook_server)
 
     local http_methods={
         GET=requests.get,
@@ -83,7 +89,7 @@ function ApiV3:_request(url,params,files,method,check_for_errors,use_webhook_ser
     
     if not params  then  params={} end
 
-    if self.access_token ~= '' then params['access_token']=self.access_token
+    if self.access_token then params.access_token=self.access_token
     end
 
     local requester=http_methods[method]
