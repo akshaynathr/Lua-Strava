@@ -34,9 +34,11 @@ end
 
 
 function TestApiV3:Test_authorization_url()
-
+   local client_id='18243'
+   
+   local redirect_uri='http://localhost:5000/auth'
    local newApiV3=protocol:new({access_token=1234324,requests_session='123', rate_limiter='aaa' })
-   local auth_url=newApiV3:authorization_url('121231','http://localhost:8080','auto',{'write'},'state')
+   local auth_url=newApiV3:authorization_url(client_id,redirect_uri,'auto',{ 'view','write'})
    luaunit.assertStrContains(auth_url,'https')
    print(auth_url)
 
