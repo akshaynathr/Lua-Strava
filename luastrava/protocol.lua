@@ -53,8 +53,11 @@ function ApiV3:authorization_url(client_id,redirect_uri,approval_prompt,scope,st
 end
 
 function ApiV3:exchange_code_for_token(client_id,client_secret,code)
-   response= self._request('https://'..  self.server ..'/oauth/token',{client_id=client_id,client_secret=client_secret,code=code},'POST')
-   token=responese['access_token']
+  
+    local response= self:_request('https://'..  self.server ..'/oauth/token',{client_id=client_id,client_secret=client_secret,code=code},'POST')
+
+
+   local token=response['access_token']
    self.access_token=token
 
    return token
@@ -63,8 +66,9 @@ end
 
 function ApiV3:_resolve_url(url,use_webhook_server)
     server=use_webhook_server and self.server_webhook_events or self.server
-
-    url='https://' .. server .. self.api_base .. url
+    if string.find(url,'http')==nil then 
+        url='https://' .. server .. self.api_base .. url
+    end
     return url
 
 
@@ -79,6 +83,8 @@ function ApiV3:_request(url,params,method,files,check_for_errors,use_webhook_ser
         DELETE=requests.delete
     
     }
+    print("FROM REQUEST")
+    print(url .. ' '..method)
 
     method=method or 'GET'
     check_for_errors= check_for_errors or true
@@ -91,11 +97,18 @@ function ApiV3:_request(url,params,method,files,check_for_errors,use_webhook_ser
 
     if self.access_token then params.access_token=self.access_token
     end
+    
+    print("REQUEST URL=" .. url)
 
     local requester=http_methods[method]
+
     assert(requester~=nil,'INVALID HTTP REQUEST')
 
     local raw=requester{url=url,params=params}
+    print("REQUEST DETAILS")
+    print(raw.status_code)
+
+
     if check_for_errors== true then
         self:_handle_protocol_error(raw)
     end
