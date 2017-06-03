@@ -4,6 +4,7 @@ local table = require "table"
 --Module table
 local urlencode={}
 
+setmetatable(urlencode ,{__name='luastrava.encode';})
 --URL encode a string.
 local function encode(str)
 
