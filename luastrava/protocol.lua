@@ -1,5 +1,5 @@
 local requests=require('requests')
-local encode =require('encode')
+local encode =require('luastrava.encode') 
 
 local ApiV3 = { 
     server='www.strava.com',
