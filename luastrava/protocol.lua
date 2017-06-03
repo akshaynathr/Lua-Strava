@@ -20,7 +20,7 @@ end
 
 
 function ApiV3:authorization_url(client_id,redirect_uri,approval_prompt,scope,state) 
-
+    approval_prompt=approval_prompt or 'auto'
     local a_prompt={ auto=true, force=true}
 
 
