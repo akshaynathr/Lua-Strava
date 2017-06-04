@@ -10,7 +10,7 @@ function Client:new(o)
     setmetatable(o,self)
     self.__index=self
 
-    o.protocol=protocol:new{access_token=access_token,requests_session=requests_session,rate_limiter=rate_limiter}
+    o.protocol=protocol.new{access_token=access_token,requests_session=requests_session,rate_limiter=rate_limiter}
 
     return o
 
@@ -30,19 +30,29 @@ end
 function Client:authorization_url(client_id,redirect_uri,approval_prompt,scope,state)
     approval_prompt=approval_prompt or 'auto'
 
-    self.protocol:authorization_url(client_id,redirect_uri,approval_prompt,scope,state)
+    return self.protocol.authorization_url(client_id,redirect_uri,approval_prompt,scope,state)
 end
 
 
 function Client:exchange_code_for_token(client_id,client_secret,code)
 
-    return self.protocol:exchange_code_for_token(client_id,client_secret,code)
+    return self.protocol.exchange_code_for_token(client_id,client_secret,code)
+end
+
+
+function Client:get_athlete(athlete_id)
+    local raw
+    if athlete_id then
+        raw=self.protocol:get('/athlete')
+    else
+        raw=self.protocol:get('/athletes/'.. athlete_id)
+    end
+
 end
 
 
 function Client:deauthorize()
 
 end
-
 
 return { Client=Client}
