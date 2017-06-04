@@ -116,16 +116,25 @@ function ApiV3:_request(url,params,method,files,check_for_errors,use_webhook_ser
     if raw.status_code == 204 then 
          resp={}
     else 
-        resp=raw.json()
+        resp,err=raw.json()
+
         
     end
 
     return resp
 end
 
-function ApiV3:_handle_protocol_error(raw)
+function ApiV3:_handle_protocol_error(res)
+    if 400 <= res.status_code <500 then
+        error("Client Error :" .. res.status_code)
 
+    elseif 500<= res.status_code < 600 then
+        error("Server Error:" .. res.status_code)
 
+    end 
+
+    return res
+    
 end
 return {
     ApiV3=ApiV3
