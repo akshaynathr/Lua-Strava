@@ -55,7 +55,7 @@ end
 
 function ApiV3:exchange_code_for_token(client_id,client_secret,code)
   
-    local response= self:_request('https://'..  self.server ..'/oauth/token',{client_id=client_id,client_secret=client_secret,code=code},'POST')
+    local response= self:_request{url='https://'..  self.server ..'/oauth/token',params={client_id=client_id,client_secret=client_secret,code=code},method='POST'}
 
 
    local token=response['access_token']
@@ -127,13 +127,14 @@ function ApiV3:_request(o) --(url,params,method,files,check_for_errors,use_webho
 end
 
 function ApiV3:_handle_protocol_error(res)
-    if 400 <= res.status_code <500 then
-        error("Client Error :" .. res.status_code)
+    print(res.status_code)
+    if 400 <= res.status_code and res.status_code <500 then
+       error("Client Error :" .. res.status_code)
 
-    elseif 500<= res.status_code < 600 then
+    elseif 500<= res.status_code and res.status_code< 600 then
         error("Server Error:" .. res.status_code)
 
-    end 
+    end--]]-- 
 
     return res
     
@@ -142,7 +143,7 @@ end
 
 function ApiV3:get(url,check_for_errors,use_webhook_server,params)
 
---    return self:_request(url,
+    return self:_request{url=url,params=params,check_for_errors=True,use_webhook_server=use_webhook_server}
 end
 return {
     ApiV3=ApiV3
