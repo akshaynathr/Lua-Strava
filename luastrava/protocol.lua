@@ -1,5 +1,6 @@
 local requests=require('requests')
 local encode =require('luastrava.encode') 
+local decode =require('luastrava.decode')
 
 local ApiV3 = { 
     server='www.strava.com',
@@ -74,7 +75,7 @@ function ApiV3:_resolve_url(url,use_webhook_server)
 
 end
 
-function ApiV3:_request(url,params,method,files,check_for_errors,use_webhook_server)
+function ApiV3:_request(o) --(url,params,method,files,check_for_errors,use_webhook_server)
 
     local http_methods={
         GET=requests.get,
@@ -84,32 +85,33 @@ function ApiV3:_request(url,params,method,files,check_for_errors,use_webhook_ser
     
     }
     print("FROM REQUEST")
-    print(url .. ' '..method)
+    print(o.url .. ' '.. o.method)
 
-    method=method or 'GET'
-    check_for_errors= check_for_errors or true
-    use_webhook_server=use_webhook_server or false
+    o.method=o.method or 'GET'
 
-    url=self:_resolve_url(url,use_webhook_server)
+    o.check_for_errors= o.check_for_errors or true
+    o.use_webhook_server=o.use_webhook_server or false
+
+    o.url=self:_resolve_url(o.url,o.use_webhook_server)
     --log here
     
-    if not params  then  params={} end
+    if not o.params  then  o.params={} end
 
-    if self.access_token then params.access_token=self.access_token
+    if self.access_token then o.params.access_token=self.access_token
     end
     
-    print("REQUEST URL=" .. url)
+    print("REQUEST URL=" .. o.url)
 
-    local requester=http_methods[method]
+    local requester=http_methods[o.method]
 
     assert(requester~=nil,'INVALID HTTP REQUEST')
 
-    local raw=requester{url=url,params=params}
+    local raw=requester{url=o.url,params=o.params}
     print("REQUEST DETAILS")
     print(raw.status_code)
 
 
-    if check_for_errors== true then
+    if o.check_for_errors== true then
         self:_handle_protocol_error(raw)
     end
     local resp
@@ -135,6 +137,12 @@ function ApiV3:_handle_protocol_error(res)
 
     return res
     
+end
+
+
+function ApiV3:get(url,check_for_errors,use_webhook_server,params)
+
+--    return self:_request(url,
 end
 return {
     ApiV3=ApiV3
