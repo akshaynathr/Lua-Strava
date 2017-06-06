@@ -53,7 +53,7 @@ end
 
 
 function Client:deauthorize()
-
+     self.protocol:post{url="oauth/deauthorize"}
 end
 
 return { Client=Client}
