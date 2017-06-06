@@ -154,6 +154,33 @@ function ApiV3:post(args) --(url,files=None,check_for_errors,use_webhook_server,
     return self:_request{url=args.url,params=args.params,files=args.files,method='POST',check_for_errors=args.check_for_errors,use_webhook_server=args.use_webhook_server}
 
 end
+
+
+function ApiV3:put(args) --(url,files=None,check_for_errors,use_webhook_server,params)
+    args.check_for_errors=args.check_for_errors or true
+
+    args.use_webhook_server=args.use_webhook_server or false
+
+    args.files=args.files or nil
+
+    return self:_request{url=args.url,params=args.params,files=args.files,method='PUT',check_for_errors=args.check_for_errors,use_webhook_server=args.use_webhook_server}
+
+end
+
+
+function ApiV3:delete(args) --(url,files=None,check_for_errors,use_webhook_server,params)
+    args.check_for_errors=args.check_for_errors or true
+
+    args.use_webhook_server=args.use_webhook_server or false
+
+    args.files=args.files or nil
+
+    return self:_request{url=args.url,params=args.params,files=args.files,method='DELETE',check_for_errors=args.check_for_errors,use_webhook_server=args.use_webhook_server}
+
+end
+
+
+
 return {
     ApiV3=ApiV3
 
