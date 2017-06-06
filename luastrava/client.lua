@@ -1,5 +1,5 @@
 local protocol=require('luastrava.protocol').ApiV3
-local date=require('date')
+--local date=require('date')
 
 local Client={}
 
@@ -47,6 +47,7 @@ function Client:get_athlete(athlete_id)
     else
         raw=self.protocol:get('/athletes/'.. athlete_id)
     end
+    return raw
 
 end
 
