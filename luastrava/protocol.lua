@@ -147,7 +147,7 @@ end
 function ApiV3:post(args) --(url,files=None,check_for_errors,use_webhook_server,params)
     args.check_for_errors=args.check_for_errors or true
 
-    args.use_webhook_server=args.use_webhook_server or true
+    args.use_webhook_server=args.use_webhook_server or false
 
     args.files=args.files or nil
 
