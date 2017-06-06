@@ -83,8 +83,6 @@ function ApiV3:_request(o) --(url,params,method,files,check_for_errors,use_webho
         DELETE=requests.delete
     
     }
-    print("FROM REQUEST")
-    print(o.url .. ' '.. o.method)
 
     o.method=o.method or 'GET'
 
