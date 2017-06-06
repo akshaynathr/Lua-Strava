@@ -42,7 +42,7 @@ end
 
 function Client:get_athlete(athlete_id)
     local raw
-    if athlete_id then
+    if  not athlete_id then
         raw=self.protocol:get('/athlete')
     else
         raw=self.protocol:get('/athletes/'.. athlete_id)
