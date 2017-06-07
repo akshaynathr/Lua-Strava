@@ -56,4 +56,17 @@ function Client:deauthorize()
      self.protocol:post{url="oauth/deauthorize"}
 end
 
+
+function Client:update_athlete(args) --args(city,state,country,sex,weight
+    local params={ city=args.city,
+                   state=args.state,
+                   country=args.country,
+                   sex=args.sex}
+    if args.weight then params.weight=tonumber(args.weight) end
+
+    local athlete=self.protocol:put{url='/athlete',params=params}
+
+    return athlete
+
+end
 return { Client=Client}
