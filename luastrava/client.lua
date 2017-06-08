@@ -69,4 +69,15 @@ function Client:update_athlete(args) --args(city,state,country,sex,weight
     return athlete
 
 end
+
+function Client:get_athlete_friends(args) --url(athlete_id,limit)
+    if not args.athlete_id then
+        result=self.protocol:get('/athlete/friends')
+    else 
+        result=self.protocol:get('/athletes/'.. athlete_id ..'/friends')
+
+    end
+    return result
+end
+
 return { Client=Client}
