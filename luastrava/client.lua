@@ -27,10 +27,10 @@ function Client:set_access_token(v)
 end
 
 
-function Client:authorization_url(client_id,redirect_uri,approval_prompt,scope,state)
-    approval_prompt=approval_prompt or 'auto'
+function Client:authorization_url(args)--args( client_id,redirect_uri,approval_prompt,scope,state)
+    args.approval_prompt=args.approval_prompt or 'auto'
 
-    return self.protocol:authorization_url(client_id,redirect_uri,approval_prompt,scope,state)
+    return self.protocol:authorization_url(args.client_id,args.redirect_uri,args.approval_prompt,args.scope,args.state)
 end
 
 
@@ -70,12 +70,21 @@ function Client:update_athlete(args) --args(city,state,country,sex,weight
 
 end
 
-function Client:get_athlete_friends(args) --url(athlete_id,limit)
+function Client:get_athlete_friends(args) --args(athlete_id,limit)
     if not args.athlete_id then
         result=self.protocol:get('/athlete/friends')
     else 
         result=self.protocol:get('/athletes/'.. athlete_id ..'/friends')
 
+    end
+    return result
+end
+
+function Client:get_athlete_followers(args) -- args(athlete_id,limit)
+    if not args.athlete_id then
+        result=self.protocol:get('/athlete/followers')
+    else
+        result=self.protocol:get('/athletes/' .. args.athlete_id ..'/followers')
     end
     return result
 end
