@@ -103,4 +103,12 @@ function Client:get_athlete_koms(args)
     local result=self.protocol:get('/athletes/' .. args.athlete_id .. '/koms')
     return result
 end
+
+function Client:get_athlete_zones(args)
+    
+    local result=self.protocol:get('/athlete/zones')
+    return result
+end
+
+
 return { Client=Client}
