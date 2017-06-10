@@ -89,4 +89,13 @@ function Client:get_athlete_followers(args) -- args(athlete_id,limit)
     return result
 end
 
+function Client:get_athlete_stats(athlete_id)
+    if not athlete_id then
+        athlete_id=self:get_athlete().id
+    end
+    if athlete_id==nil then error("no athlete id") end
+    result=self.protocol:get('/athletes/' .. athlete_id .. '/stats')
+    return result
+end
+
 return { Client=Client}
