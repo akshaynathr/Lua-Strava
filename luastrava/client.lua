@@ -98,4 +98,9 @@ function Client:get_athlete_stats(athlete_id)
     return result
 end
 
+function Client:get_athlete_koms(args)
+    
+    local result=self.protocol:get('/athletes/' .. args.athlete_id .. '/koms')
+    return result
+end
 return { Client=Client}
