@@ -81,6 +81,7 @@ function Client:get_athlete_friends(args) --args(athlete_id,limit)
 end
 
 function Client:get_athlete_followers(args) -- args(athlete_id,limit)
+    local result
     if not args.athlete_id then
         result=self.protocol:get('/athlete/followers')
     else
@@ -89,12 +90,21 @@ function Client:get_athlete_followers(args) -- args(athlete_id,limit)
     return result
 end
 
+
+function Client:get_both_following(args)
+    if not args.athlete_id then error("No athlete id provided") end
+
+    local result=self.protocol:get('/athletes/' .. athlete_id .. '/both-following')
+
+    return result
+end
+
 function Client:get_athlete_stats(athlete_id)
     if not athlete_id then
         athlete_id=self:get_athlete().id
     end
     if athlete_id==nil then error("no athlete id") end
-    result=self.protocol:get('/athletes/' .. athlete_id .. '/stats')
+    local result=self.protocol:get('/athletes/' .. athlete_id .. '/stats')
     return result
 end
 
