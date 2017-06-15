@@ -139,8 +139,8 @@ end
 
 
 function ApiV3:get(url,check_for_errors,use_webhook_server,params)
-
-    return self:_request{url=url,params=params,check_for_errors=True,use_webhook_server=use_webhook_server}
+    use_webhook_server=use_webhook_server or false
+    return self:_request{url=url,params=params,check_for_errors=true,use_webhook_server=use_webhook_server}
 end
 
 
