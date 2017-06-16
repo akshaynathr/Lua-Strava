@@ -193,4 +193,7 @@ function Client:delete_activity(args) --args(activity_id)
     return res
 end
 
+function Client:get_activity_zones(activity_id)
+    local res=self.protocol:get('/activities/' .. activity_id ..'/zones')
+end
 return { Client=Client}
