@@ -136,4 +136,17 @@ function Client:get_friend_activities(args) --args(limit)
 end
 
 
+function Client:create_activity(args) --args(name,activity_type,start_date_local,elapsed_time,description,distance)
+    
+    local params={name=args.name,type=args.activity_type, start_date_local=args.start_date_local,elapsed_time=args.elapsed_time}
+    if args.description then  params.description=args.description end
+
+    if args.distance then params.distance=args.distance end
+
+    local raw_activity=self.protocol:post{url='/activities',params=params }
+
+    return raw_activity
+end
+
+
 return { Client=Client}
