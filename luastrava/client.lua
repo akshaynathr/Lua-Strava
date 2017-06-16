@@ -193,7 +193,20 @@ function Client:delete_activity(args) --args(activity_id)
     return res
 end
 
-function Client:get_activity_zones(activity_id)
+function Client:get_activity_zones(activity_id)--args(activity_id,markdown)
     local res=self.protocol:get('/activities/' .. activity_id ..'/zones')
+    return res
 end
+
+function Client:get_activity_comments(args)
+    args.markdown=args.markdown or false
+    local res=self.protocol:get('/activities/' .. args.activity_id ..'/comments',true,false,{markdown=args.markdown})
+    return res
+end
+
+function Client:get_activity_kudos(args) --args(activity_id)
+    local res=self.protocol:get('/activities/' .. args.athlete_id ..'/kudos',true,false,{markdown=args.markdown})
+    return res
+end
+
 return { Client=Client}
