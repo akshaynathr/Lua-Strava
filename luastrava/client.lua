@@ -108,7 +108,7 @@ function Client:get_athlete_stats(athlete_id)
     return result
 end
 
-function Client:get_athlete_koms(args)
+function Client:get_athlete_koms(args) --(athlete_id)
     
     local result=self.protocol:get('/athletes/' .. args.athlete_id .. '/koms')
     return result
@@ -118,6 +118,21 @@ function Client:get_athlete_zones(args)
     
     local result=self.protocol:get('/athlete/zones')
     return result
+end
+
+
+function Client:get_activity(args) --args(athlete_id,include_all_efforts)
+    args.include_all_efforts=args.include_all_efforts or false
+    local res=self.protocol:get('/activities/' .. args.athlete_id,{include_all_efforts=include_all_efforts})
+
+    return res
+end
+
+
+function Client:get_friend_activities(args) --args(limit)
+    local res=self.protocol:get('/activities/following' )
+
+    return res
 end
 
 
