@@ -143,10 +143,54 @@ function Client:create_activity(args) --args(name,activity_type,start_date_local
 
     if args.distance then params.distance=args.distance end
 
+    local activities_list={ride, run, swim, workout, hike, walk, nordicski,
+                           alpineski, backcountryski, iceskate, inlineskate,  kitesurf, rollerski,windsurf, workout, snowboard, snowshoe}
+    local flag=0 
+    for k,v in activities_list do
+        if v==args.activity then flag=1 end
+    end
+
+    assert(flag==1,"invalid activity specified")
     local raw_activity=self.protocol:post{url='/activities',params=params }
 
     return raw_activity
 end
 
+
+function Client:update_activity(args) --args(activity_id,name,activity_type,description,distance,private,commute,trainer,gear_id,device_name)
+    
+    local params={}
+
+    if args.name then  params.name=args.name end
+
+    if args.activity_type then params.activity_type=args.activity_type end
+    
+
+    if args.private then  params.private=args.private end
+
+    if args.commute then params.commute=args.commute end
+
+    if args.trainer then params.trainer = args.trainer end
+
+    if args.gear_id then  params.gear_id=args.gear_id end
+    
+    if args.device_name then params.device_name=args.device_name end
+ 
+    if args.description then  params.description=args.description end
+
+    if args.distance then params.distance=args.distance end
+    local url='/activities/' .. activity_id
+
+    local raw_activity=self.protocol:put{url=url,params=params }
+
+    return raw_activity
+end
+
+
+function Client:delete_activity(args) --args(activity_id)
+    local url='/activities/' .. args.activity_id
+    local res=    self.protocol:delete{url=url}
+    return res
+end
 
 return { Client=Client}
