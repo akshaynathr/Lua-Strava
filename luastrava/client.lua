@@ -120,14 +120,22 @@ function Client:get_athlete_zones(args)
     return result
 end
 
+--------------------ACTIVITY FUNCTIONS ----------------------------
 
 function Client:get_activity(args) --args(athlete_id,include_all_efforts)
     args.include_all_efforts=args.include_all_efforts or false
-    local res=self.protocol:get('/activities/' .. args.athlete_id,{include_all_efforts=include_all_efforts})
+    local res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=include_all_efforts})
 
     return res
 end
 
+function Client:get_related_activities(args) --args(activity_id)
+
+
+local res=self.protocol:get('/activities/' .. args.activity_id ..'/related')
+
+return res
+end
 
 function Client:get_friend_activities(args) --args(limit)
     local res=self.protocol:get('/activities/following' )
@@ -193,8 +201,8 @@ function Client:delete_activity(args) --args(activity_id)
     return res
 end
 
-function Client:get_activity_zones(activity_id)--args(activity_id,markdown)
-    local res=self.protocol:get('/activities/' .. activity_id ..'/zones')
+function Client:get_activity_zones(args)--args(activity_id,markdown)
+    local res=self.protocol:get('/activities/' .. args.activity_id ..'/zones')
     return res
 end
 
@@ -205,7 +213,53 @@ function Client:get_activity_comments(args)
 end
 
 function Client:get_activity_kudos(args) --args(activity_id)
-    local res=self.protocol:get('/activities/' .. args.athlete_id ..'/kudos',true,false,{markdown=args.markdown})
+    local res=self.protocol:get('/activities/' .. args.activity_id ..'/kudos',true,false,{markdown=args.markdown})
+    return res
+end
+
+function Client:get_activity_laps(args)
+    local res=self.protocol:get('/activities/' .. args.activity_id ..'/laps')
+    return res
+end
+
+-----------------------CLUBS ACTIVITY---------------------------------
+
+function Client:get_club(args)
+    local url='/clubs/' .. args.club_id .. '/leave'
+    local res=self.protocol:post{url=url}
+    return res
+end
+
+function Client:get_athlete_clubs(args)
+    local res=self.protocol:get('/athlete/clubs')
+    return res
+end
+
+function Client:join_club(args)
+    local res=self.protocol:post('/clubs/' .. args.club_id .. '/join')
+    return res
+end
+
+function Client:leave_club(args)
+    local res=self.protocol:post('/clubs/' .. args.club_id .. '/leave')
+    return res
+end
+
+function Client:get_club_members(args)
+    local res=self.protocol:get('/clubs/' .. args.club_id .. '/members')
+    return res
+end
+
+
+function Client:get_club_activities(args)
+    local res=self.protocol:get('/clubs/' .. args.club_id .. '/activities')
+    return res
+end
+
+
+
+function Client:get_gear(args)
+    local res=self.protocol:get('/gear/' .. args.gear_id)
     return res
 end
 
