@@ -13,4 +13,9 @@ luastrava is in early stage of its development.So rock file for the library is n
 
 ## Authentication and Authorization with Strava API
 
+To retrieve data about athletes and activities from Strava API, you will need authorization to do so.Refer [Strava official documentation](https://strava.github.io/api/) for the detailed descriptiona about OAuth2 protocol used by Strava for authentication.
+
+### Requesting Authorization
+
+
 
