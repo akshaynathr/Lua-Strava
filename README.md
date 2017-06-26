@@ -104,7 +104,7 @@ The function **luastrava.client.Client:get_athlete_friends()** can be used to re
     local deepaks_friend=client:get_athlete_friends(834123)
 ```
 
-
+function returns table consisting of all fields in json response.Please refer Strava API documentation for more details.
 
 
 
