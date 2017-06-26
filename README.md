@@ -1,6 +1,6 @@
 # Documentation
 
-*luastrava* is a Lua library for Strava API version 3.
+**luastrava** is a Lua library for Strava API version 3.
 
 ## Getting started
 luastrava is in early stage of its development.So rock file for the library is not yet available.To test the library the folder luastrava can  be downloaded to your project folder from github repository.
@@ -26,7 +26,7 @@ local url=client:authorization_url{client_id=CLIENT_ID, redirect_uri='http://str
 
 ```
 
-For development , localhost or 127.0.0.1 as redirect host.
+For development , localhost or 127.0.0.1 can be used  as redirect host.
 
 ```
 local url=client:authorization_url{client_id=CLIENT_ID, redirect_uri='http://127.0.0.1:5000/authorization'}
