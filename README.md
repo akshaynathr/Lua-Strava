@@ -49,7 +49,19 @@ Example from lapis based web app is given below
 The link can be used to gain permission rights from the user.In the URL handler */authorization* specified as redirect_uri, a temporary code is sent back from strava server. This temporary code needs to be exchanged for user's token from Strava
 
 ```
-local strava=require('luastrava.client').Client
-code=
+
+ app:get("/auth",function(self)
+  
+   local code=self.params.code --Fetch the code sent via url parameter
+            
+   client:exchange_code_for_token(client_id,client_secret,code) --fetch token
+
+  self.session.token=client:get_access_token() -- token is saved in session 
+
+   return "Authorized token=".. client:get_access_token() --Display the token  as a proof for authorization. 
+                            
+end)
 
 ```
+The resulting access_token must be saved for later use. In the above web app the code is saved in session.
+
