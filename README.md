@@ -76,10 +76,10 @@ local athlete=client:get_athlete()
 
 ```
 
-##Athletes
+## Athletes
 Every user in strava is called as athlete. The following functions helps to retrieve athlete data from Strava.Strava API documentation can be found [here] (https://strava.github.io/api/v3/athlete)
 
-###Retrive current athlete
+### Retrive current athlete
 Details about current user can be retrieved using **luastrava.client.Client:get_athlete()** function.No parameters is required.
 
 ```
