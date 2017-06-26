@@ -107,5 +107,15 @@ The function **luastrava.client.Client:get_athlete_friends()** can be used to re
 function returns table consisting of all fields in json response.Please refer Strava API documentation for more details.
 
 
+### List athlete followers
+The function **luastrava.client.Client:get_athlete_followers** retrieves the followers of the user. It works similar to get_athlete_friends function.
+```
+    local followers=client:get_athlete_followers()
+
+    local deepaks_followers=client:get_athlete_followers(834123)
+```
+
+
+
 
 
