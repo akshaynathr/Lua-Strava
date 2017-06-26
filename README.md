@@ -1,2 +1,2 @@
-# REST client library in Lua for Strava website API v3
+# REST client library in Lua for Strava API v3
 
