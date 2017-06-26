@@ -63,5 +63,49 @@ The link can be used to gain permission rights from the user.In the URL handler 
 end)
 
 ```
-The resulting access_token must be saved for later use. In the above web app the code is saved in session.
+The resulting **access_token** must be saved for later use. In the above web app the token  is saved in session.The token is valid till the access is revoked by user.
+
+Using the token the data from Strava API can be retrieved.
+
+```
+local strava=require('luastrava.client').Client
+local client=strava:new()
+client:set_access_token(TOKEN_STORED)
+local athlete=client:get_athlete()
+
+
+```
+
+##Athletes
+Every user in strava is called as athlete. The following functions helps to retrieve athlete data from Strava.Strava API documentation can be found [here] (https://strava.github.io/api/v3/athlete)
+
+###Retrive current athlete
+Details about current user can be retrieved using **luastrava.client.Client:get_athlete()** function.No parameters is required.
+
+```
+    local athlete=client:get_athlete()
+    print(athlete.firstname)
+```
+function returns a table containing all fields in the json response.
+
+### Retrieve another athlete
+The same function **luastrava.client.Client:get_athlete()** can be used to retrieve details of another athlete by passing athlete id as parameter.  
+```
+    local athlete=client:get_athlete(831114)
+    print(athlete.firstname)
+
+```
+### List athlete friends
+The function **luastrava.client.Client:get_athlete_friends()** can be used to retrieve the friends of current user or a specific user. To retrieve friends of a specific user call the function with athlete id.
+
+``` 
+    local friends=client:get_athlete_friends()
+
+    local deepaks_friend=client:get_athlete_friends(834123)
+```
+
+
+
+
+
 
