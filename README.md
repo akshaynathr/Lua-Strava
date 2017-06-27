@@ -101,7 +101,7 @@ The function **luastrava.client.Client:get_athlete_friends()** can be used to re
 ``` 
     local friends=client:get_athlete_friends()
 
-    local deepaks_friend=client:get_athlete_friends(834123)
+    local deepaks_friend=client:get_athlete_friends{athlete_id=834123}
 ```
 
 function returns table consisting of all fields in json response.Please refer Strava API documentation for more details.
@@ -112,9 +112,19 @@ The function **luastrava.client.Client:get_athlete_followers** retrieves the fol
 ```
     local followers=client:get_athlete_followers()
 
-    local deepaks_followers=client:get_athlete_followers(834123)
+    local deepaks_followers=client:get_athlete_followers{athlete_id=834123}
 ```
 
+### List both following
+Retrieve the athletes who both the authenticated user and the indicated athlete are following.The function **luastrava.client.Client:get_both_following** is used for this.
+
+```
+    local both_following=client:get_both_following{athlete_id=987653}
+
+```
+function returns a lua table containing all fields of json response from Strava.
+
+### 
 
 
 
