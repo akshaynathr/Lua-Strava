@@ -124,7 +124,14 @@ Retrieve the athletes who both the authenticated user and the indicated athlete 
 ```
 function returns a lua table containing all fields of json response from Strava.
 
-### 
+### Update current athlete
+This requires **write** permission, requested during authorization process.To update details of current user, **luastrava.client.Client:update_athlete** function is used.Functions takes the table as arguments with following parameters.
+
+```
+     local update_res=client:update_athlete{city='Kannur',state="Kerala",country="India",weight=60}
+    
+```
+
 
 
 
