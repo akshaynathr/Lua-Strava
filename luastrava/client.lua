@@ -187,7 +187,7 @@ function Client:update_activity(args) --args(activity_id,name,activity_type,desc
     if args.description then  params.description=args.description end
 
     if args.distance then params.distance=args.distance end
-    local url='/activities/' .. activity_id
+    local url='/activities/' .. args.activity_id
 
     local raw_activity=self.protocol:put{url=url,params=params }
 
