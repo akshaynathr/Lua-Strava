@@ -165,3 +165,17 @@ Returns a detailed representation if the activity is owned by the requesting ath
 ```
 local result=client:create_activity{name='test',activity_type='snowboard',  start_date_local='2015-07-06T12:08:27',elapsed_time=1000}
 ```
+
+### Update activity
+**luastrava.client.Client:update_activity** updates the activity.This requires **write** permissions,as requested during the authorization process.
+Takes lua table as parameter with following fields.
+
+- name: **string** optional
+- activity_type: **string** optional
+- private: **boolean** optional defaults to false
+- commute: **boolean** optional defaults to false
+- trainer: **boolean** optional defaults to false
+- gear_id: **string** optional 'none' clears gear from activity
+- description: **string** optional
+
+
