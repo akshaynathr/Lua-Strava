@@ -131,8 +131,18 @@ This requires **write** permission, requested during authorization process.To up
      local update_res=client:update_athlete{city='Kannur',state="Kerala",country="India",weight=60}
     
 ```
+## Activities
+Activities are the base object for Strava runs, rides, swims etc.
+
+### Retrieve an activity
+Returns a detailed representation if the activity is owned by the requesting athlete. Returns a summary representation for all other requests.Function **luastrava.client.Client:get_activity** is used to retrieve the activity data.** athlete_id** is required as parameter. Parameter are passed as table containing following fields.
+
+- athlete_id
+- include_all_efforts
 
 
+```
+     local result=client:get_activity{athlete_id=860001}
 
-
+```
 
