@@ -127,6 +127,12 @@ function returns a lua table containing all fields of json response from Strava.
 ### Update current athlete
 This requires **write** permission, requested during authorization process.To update details of current user, **luastrava.client.Client:update_athlete** function is used.Functions takes the table as arguments with following parameters.
 
+- city
+- state
+- country
+- sex
+- weight *(integer)*
+
 ```
      local update_res=client:update_athlete{city='Kannur',state="Kerala",country="India",weight=60}
     
@@ -138,7 +144,7 @@ Activities are the base object for Strava runs, rides, swims etc.
 Returns a detailed representation if the activity is owned by the requesting athlete. Returns a summary representation for all other requests.Function **luastrava.client.Client:get_activity** is used to retrieve the activity data.** athlete_id** is required as parameter. Parameter are passed as table containing following fields.
 
 - athlete_id
-- include_all_efforts
+- include_all_efforts *(optional)*
 
 
 ```
@@ -146,3 +152,16 @@ Returns a detailed representation if the activity is owned by the requesting ath
 
 ```
 
+### Create an activity
+**luastrava.client.Client:create_activity** helps to create manually entered activity.This requires **write** permission, requested during authorization process.Parameters are passed as lua table with following fields.
+
+- name
+- activity_type
+- start_date_local
+- elapsed_time
+- description
+- distance
+
+```
+local result=client:create_activity{name='test',activity_type='snowboard',  start_date_local='2015-07-06T12:08:27',elapsed_time=1000}
+```
