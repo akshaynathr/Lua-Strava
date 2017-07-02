@@ -76,6 +76,20 @@ local athlete=client:get_athlete()
 
 ```
 
+### set_access_token function
+**luastrava.client.Client:set_access_token** function is used to set the stored token to client object
+
+```
+client:set_access_token(TOKEN_VALUE)
+```
+
+### get_access_token function
+**luastrava.client.Client:get_access_token** retreives the token set for a client.Returns error if token is not set
+
+``` 
+local token= client:get_access_token() 
+```
+
 ## Athletes
 Every user in strava is called as athlete. The following functions helps to retrieve athlete data from Strava.Strava API documentation can be found [here] (https://strava.github.io/api/v3/athlete)
 
@@ -178,4 +192,6 @@ Takes lua table as parameter with following fields.
 - gear_id: **string** optional 'none' clears gear from activity
 - description: **string** optional
 
+### Delete activity
+**luastrava.client.Client:delete_activity** deletes the activity.**activity id** needs to be passed as parameter for the function
 
