@@ -134,8 +134,8 @@ Retrieve the athletes who both the authenticated user and the indicated athlete 
 
 ```
     local both_following=client:get_both_following{athlete_id=987653}
-
 ```
+
 function returns a lua table containing all fields of json response from Strava.
 
 ### Update current athlete
@@ -149,6 +149,7 @@ This requires **write** permission, requested during authorization process.To up
 
 ```
      local update_res=client:update_athlete{city='Kannur',state="Kerala",country="India",weight=60}
+
     
 ```
 ## Activities
@@ -196,6 +197,42 @@ Takes lua table as parameter with following fields.
 **luastrava.client.Client:delete_activity** deletes the activity.**activity id** needs to be passed as parameter to the function
 
 ### List activity comments
-**luastrava.client.Client:get_activity_comments** function fetches comments related to an activity
+**luastrava.client.Client:get_activity_comments** function fetches comments related to an activity.Parameters are passed as lua tables.
+
+### List kudos for activity
+**luastrava.client.Client:get_activity_kudos** function gets kudos for an activity.Parameters are passed as lua tables.
+
+## Clubs
+Clubs represent groups of athletes on Strava. They can be public or private
+
+### Retrieve a club
+**luastrava.client.Client:get_club** function is used to retrive details about a club.**club_id** is to be passed as parameter in lua table.
+
+```
+local club_details=client:get_club{club_id=121211}
+```
+
+### List athlete clubs
+
+**luastrava.client.Client:get_athlete_club** fetches an array of clubs that the currently authenticated athlete is a member of.Returns a club summary representation.
+``` 
+local athlete_club=client:get_athlete_club()
+
+```
+
+### Join club
+**luastrava.client.Client:join_club** is used to join a club.**club_id** is to be passed as parameter.
+
+```
+client:join_club{ club_id=123232}
+```
+
+### Leave club
+**luastrava.client.Client:leave_club** function is used to leave a club.
+
+```
+client:leave_club{ club_id=123232}
+
+```
 
 
