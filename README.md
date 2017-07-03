@@ -193,5 +193,9 @@ Takes lua table as parameter with following fields.
 - description: **string** optional
 
 ### Delete activity
-**luastrava.client.Client:delete_activity** deletes the activity.**activity id** needs to be passed as parameter for the function
+**luastrava.client.Client:delete_activity** deletes the activity.**activity id** needs to be passed as parameter to the function
+
+### List activity comments
+**luastrava.client.Client:get_activity_comments** function fetches comments related to an activity
+
 
