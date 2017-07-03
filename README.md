@@ -242,4 +242,13 @@ client:leave_club{ club_id=123232}
 local club_activities=client:get_club_activities{club_id=121211}
 ```
 
+## Gear
+Gear represents equipment used during an activity. The object is returned in summary or detailed representations.
+
+### Retrieve Gear
+**luastrava.client.Client:get_gear** retrieve details about a specific item of gear. The requesting athlete must own the gear. At this time it is not possible to view just anyone’s gear type and usage
+
+```
+local gear=client:get_gear{gear_id=121211}
+```
 
