@@ -263,4 +263,11 @@ function Client:get_gear(args)
     return res
 end
 
+function Client:get_routes(args)
+    if args.athlete_id== nil then args.athlete_id=self:get_athlete().id end
+    local res=self.protocol:get('/athletes/' .. args.athlete_id ..'/routes')
+    return res
+end
+
+
 return { Client=Client}
