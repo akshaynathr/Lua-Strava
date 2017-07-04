@@ -251,4 +251,10 @@ Gear represents equipment used during an activity. The object is returned in sum
 ```
 local gear=client:get_gear{gear_id=121211}
 ```
+## Routes
+Routes are manually-created paths made up of sections called legs.
 
+### Retrieve a route
+
+### List routes
+Lists a specific athlete’s routes. Private routes will only be included if the authenticating user is viewing their own routes and the token has view_private permissions. 
