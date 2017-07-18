@@ -269,5 +269,10 @@ function Client:get_routes(args)
     return res
 end
 
+function Client:get_route(args) --args(route_id)
+    local res=self.protocol:get('/routes/' .. args.route_id)
+    return res
+    
+end
 
 return { Client=Client}
