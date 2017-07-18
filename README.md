@@ -22,14 +22,16 @@ The __luastrava.client.Client__ class provides __luastrava.client.Client:authori
 ```
 local strava=require('luastrava.client').Client
 local client=strava:new()
-local url=client:authorization_url{client_id=CLIENT_ID, redirect_uri='http://strava_app.example.com/authorization'}
+local url=client:authorization_url{client_id=CLIENT_ID,
+redirect_uri='http://strava_app.example.com/authorization'}
 
 ```
 
 For development , localhost or 127.0.0.1 can be used  as redirect host.
 
 ```
-local url=client:authorization_url{client_id=CLIENT_ID, redirect_uri='http://127.0.0.1:5000/authorization'}
+local url=client:authorization_url{client_id=CLIENT_ID, 
+redirect_uri='http://127.0.0.1:5000/authorization'}
 
 ```
 
@@ -37,7 +39,8 @@ Example from lapis based web app is given below
 ```
  app:get("/", function(self) 
   --create authorization url  
-  local url=client:authorization_url{client_id=client_id,redirect_uri='http:// localhost:8080/auth',scope='write'} 
+  local url=client:authorization_url{client_id=client_id,
+  redirect_uri='http:// localhost:8080/auth',scope='write'} 
 
   --redirect to the url 
       return {redirect_to=url} 
@@ -148,7 +151,8 @@ This requires **write** permission, requested during authorization process.To up
 - weight *(integer)*
 
 ```
-     local update_res=client:update_athlete{city='Kannur',state="Kerala",country="India",weight=60}
+     local update_res=client:update_athlete{city='Kannur',
+     state="Kerala",country="India",weight=60}
 
     
 ```
@@ -258,3 +262,12 @@ Routes are manually-created paths made up of sections called legs.
 
 ### List routes
 Lists a specific athlete’s routes. Private routes will only be included if the authenticating user is viewing their own routes and the token has view_private permissions. 
+
+### Retrieve a route
+This request is used to retrieve details about a route. Private routes can only be accessed if owned by the authenticating user and the token has view_private permissions.
+
+```
+local route=client:get_route({route_id=122312})
+
+```
+
