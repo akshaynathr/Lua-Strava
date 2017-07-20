@@ -4,7 +4,7 @@ package = "luastrava"
 version = "0.1.1-1"
 source = {
   url = "git://github.com/akshaynathr/Lua-Strava",
-  tag = "v0.1.1",
+  tag = "v0.1-alpha",
 }
 description = {
   summary = "A Lua REST library for strava api",
