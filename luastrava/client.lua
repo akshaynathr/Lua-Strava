@@ -279,7 +279,9 @@ function Client:get_races(args) --args(year)
     local res
     if args.year==nil then res=self.protocol:get('/running_races') 
     
-    else     res=self.protocol:get('/running_races/' .. year) end
+    else     res=self.protocol:get('/running_races/' .. args.year) end
+
+    return res
 end
 
 
