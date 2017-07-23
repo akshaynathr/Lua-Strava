@@ -236,8 +236,8 @@ client:join_club{ club_id=123232}
 
 ```
 client:leave_club{ club_id=123232}
-
 ```
+
 ### List club activities
 
 **luastrava.client.Client:get_club_activities** retrieve the recent activities performed by members of a specific club. The authenticated athlete must be a member of the club.
@@ -258,7 +258,6 @@ local gear=client:get_gear{gear_id=121211}
 ## Routes
 Routes are manually-created paths made up of sections called legs.
 
-### Retrieve a route
 
 ### List routes
 Lists a specific athlete’s routes. Private routes will only be included if the authenticating user is viewing their own routes and the token has view_private permissions. 
@@ -270,4 +269,11 @@ This request is used to retrieve details about a route. Private routes can only 
 local route=client:get_route({route_id=122312})
 
 ```
+
+## Segments
+Segments are specific sections of road. Athletes’ times are compared on these segments and leaderboards are created.[More details] (https://strava.github.io/api/v3/segments/)
+
+### Retrieve segment
+Retrieve details about a specific segment.
+
 
