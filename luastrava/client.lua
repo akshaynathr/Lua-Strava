@@ -257,12 +257,13 @@ function Client:get_club_activities(args)
 end
 
 
-
+-------------------------GEAR-----------------------
 function Client:get_gear(args)
     local res=self.protocol:get('/gear/' .. args.gear_id)
     return res
 end
 
+--------------------------ROUTES------------------------------------
 function Client:get_routes(args)
     if args.athlete_id== nil then args.athlete_id=self:get_athlete().id end
     local res=self.protocol:get('/athletes/' .. args.athlete_id ..'/routes')
@@ -275,6 +276,8 @@ function Client:get_route(args) --args(route_id)
     
 end
 
+
+-------------------------------------_RACES---------------------------
 function Client:get_races(args) --args(year)
     local res
     if args.year==nil then res=self.protocol:get('/running_races') 
@@ -287,5 +290,20 @@ end
 
 function Client:get_race(args) --args(race_id)
 end
+
+---------------SEGMENTS----------------------
+function get_segment(args) --args(segment_id)
+    if args.segment_id then
+        local res=self.protocol:get('/segment/'+args.segment_id)
+    else
+        error("No segment id specified")
+
+    end
+end
+
+function get_starrred_segment(args)
+end
+
+
 
 return { Client=Client}
