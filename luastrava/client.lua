@@ -302,7 +302,10 @@ function get_segment(args) --args(segment_id)
     end
 end
 
-function get_starrred_segment(args)
+function get_starrred_segment(args) -- args(limit)
+    local res=self.protocol:get('/segments/starred')
+    return res
+
 end
 
 
