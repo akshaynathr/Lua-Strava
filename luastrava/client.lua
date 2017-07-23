@@ -295,6 +295,7 @@ end
 function get_segment(args) --args(segment_id)
     if args.segment_id then
         local res=self.protocol:get('/segment/'+args.segment_id)
+        return res
     else
         error("No segment id specified")
 
