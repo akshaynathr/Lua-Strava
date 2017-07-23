@@ -275,5 +275,18 @@ Segments are specific sections of road. Athletes’ times are compared on these 
 
 ### Retrieve segment
 Retrieve details about a specific segment.
+parameter -  segment_id 
+return table of json response
+```
+local segment=client:get_segment({segment_id=12121})
+
+```
+
+### List starred segment
+Returns a summary representation of the segments starred by the authenticated user
+
+returns table of json response
+
+```local starred_segment=client:get_starred_segment() ```
 
 
