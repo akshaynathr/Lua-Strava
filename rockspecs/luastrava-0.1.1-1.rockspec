@@ -21,9 +21,9 @@ dependencies = {
 build = {
   type="builtin",
   modules={
-    ["luastrava.client"] = "Lua-Strava/luastrava/client.lua",
-    ["luastrava.protocol"] = "Lua-Strava/luastrava/protocol.lua",
-    ["luastrava.encode"] = "Lua-Strava/luastrava/encode.lua",
+    ["luastrava.client"] = "luastrava/client.lua",
+    ["luastrava.protocol"] = "luastrava/protocol.lua",
+    ["luastrava.encode"] = "luastrava/encode.lua",
   }
 }
 
