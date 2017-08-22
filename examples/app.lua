@@ -70,7 +70,7 @@ client:exchange_code_for_token(client_id,client_secret,code) --fetch token
 
 self.session.token=client:get_access_token() -- token is saved in session 
 
-if (self.session.token) then return {redirect_to='/main'}
+if (self.session.token) then return {redirect_to='/map'}
 else return {redirect_to='/error'} end
 
                          
@@ -79,8 +79,13 @@ else return {redirect_to='/error'} end
  app:get("/main",function(self) 
 --    local year=2015
     client:set_access_token(self.session.token)
- local races=   client:get_races({year=2015})
+    local races=client:get_races({})
     return  table.tostring(races)
     end)
 
+
+
+app:match("map","/map", function()
+    return {render=true}
+end)
 return app
