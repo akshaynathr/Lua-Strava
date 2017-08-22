@@ -9,11 +9,42 @@
     </style>
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
+    <h3>Strava Races</h3>
     <div id="map"></div>
     <script>
-      function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
+     var geocoder;
+var map;
+var Postcode;
+
+Postcode = '1058JA';
+
+function initMap() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(52.368465, 4.903921);
+    var mapOptions = {
+        zoom: 1,
+        center: latlng
+    }
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    codeAddress();
+}
+
+function codeAddress() {
+    geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': Postcode }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            var marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+            });
+            marker.setMap(map);
+        } else {
+            document.getElementById("address").value = status;
+        }
+    });
+}
+
+//google.maps.event.addDomListener(window, 'load', initMap);
+       /* var uluru = {lat: -25.363, lng: 131.044};
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: uluru
@@ -21,11 +52,11 @@
         var marker = new google.maps.Marker({
           position: uluru,
           map: map
-        });
-      }
+        });*/
+      
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key= AIzaSyBm-haBD-N4RhVmr16bsI2FfipEy-fUOug &callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm-haBD-N4RhVmr16bsI2FfipEy-fUOug&callback=initMap">
     </script>
   </body>
 </html>
