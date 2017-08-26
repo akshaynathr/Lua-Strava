@@ -8,6 +8,9 @@ local client_secret='99675b7ee65da2654be5c831cb09342079f5fdd9'
 
 local client=strava:new()
 
+
+
+
 function table.val_to_str ( v )
       if "string" == type( v ) then
       	v = string.gsub( v, "\n", "\\n" )
@@ -61,7 +64,6 @@ app:get("/login",function()
 end)
 
 
-
 app:get("/auth",function(self)
      
  local code=self.params.code --Fetch the code sent via url parameter
@@ -72,9 +74,9 @@ self.session.token=client:get_access_token() -- token is saved in session
 
 if (self.session.token) then return {redirect_to='/map'}
 else return {redirect_to='/error'} end
-
-                         
  end)
+
+
 
  app:get("/main",function(self) 
 --    local year=2015
@@ -89,3 +91,4 @@ app:match("map","/map", function()
     return {render=true}
 end)
 return app
+
