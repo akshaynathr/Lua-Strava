@@ -124,8 +124,11 @@ end
 
 function Client:get_activity(args) --args(athlete_id,include_all_efforts)
     args.include_all_efforts=args.include_all_efforts or false
-    local res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=include_all_efforts})
-
+    if args.activity_id then
+        local res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=include_all_efforts})
+    else 
+        local res=self.protocol:get('/activities' )
+    end)
     return res
 end
 
@@ -259,6 +262,7 @@ end
 
 -------------------------GEAR-----------------------
 function Client:get_gear(args)
+    if args.gear_id==nil then error("No gearid given") end
     local res=self.protocol:get('/gear/' .. args.gear_id)
     return res
 end
@@ -294,7 +298,7 @@ end
 ---------------SEGMENTS----------------------
 function get_segment(args) --args(segment_id)
     if args.segment_id then
-        local res=self.protocol:get('/segment/'+args.segment_id)
+        local res=self.protocol:get('/segment/' .. args.segment_id)
         return res
     else
         error("No segment id specified")
