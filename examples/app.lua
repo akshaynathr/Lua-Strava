@@ -58,7 +58,7 @@ end)
 
 
 app:get("/login",function()
-     local url=client:authorization_url{client_id=client_id,redirect_uri='http://localhost:8080/auth',scope='write'}
+     local url=client:authorization_url{client_id=client_id,redirect_uri='http://ec2-54-254-233-219.ap-southeast-1.compute.amazonaws.com:8080/auth',scope='write'}
       print(url)
    return {redirect_to=url}
 end)
