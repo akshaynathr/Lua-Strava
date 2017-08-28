@@ -57,7 +57,7 @@ function Client:deauthorize()
 end
 
 
-function Client:update_athlete(args) --args(city,state,country,sex,weight
+function Client:update_athlete(args) --args(city,state,country,sex,weight)
     local params={ city=args.city,
                    state=args.state,
                    country=args.country,
@@ -70,11 +70,11 @@ function Client:update_athlete(args) --args(city,state,country,sex,weight
 
 end
 
-function Client:get_athlete_friends(args) --args(athlete_id,limit)
+function Client:get_athlete_friends(args) --args(athlete_id)
     if not args.athlete_id then
         result=self.protocol:get('/athlete/friends')
     else 
-        result=self.protocol:get('/athletes/'.. athlete_id ..'/friends')
+        result=self.protocol:get('/athletes/'.. args.athlete_id ..'/friends')
 
     end
     return result
@@ -94,7 +94,7 @@ end
 function Client:get_both_following(args)
     if not args.athlete_id then error("No athlete id provided") end
 
-    local result=self.protocol:get('/athletes/' .. athlete_id .. '/both-following')
+    local result=self.protocol:get('/athletes/' .. args.athlete_id .. '/both-following')
 
     return result
 end
@@ -125,10 +125,10 @@ end
 function Client:get_activity(args) --args(athlete_id,include_all_efforts)
     args.include_all_efforts=args.include_all_efforts or false
     if args.activity_id then
-        local res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=include_all_efforts})
+        local res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=args.include_all_efforts})
     else 
         local res=self.protocol:get('/activities' )
-    end)
+    end
     return res
 end
 
@@ -233,7 +233,7 @@ function Client:get_club(args)
     return res
 end
 
-function Client:get_athlete_clubs(args)
+function Client:get_athlete_clubs()
     local res=self.protocol:get('/athlete/clubs')
     return res
 end
@@ -275,6 +275,7 @@ function Client:get_routes(args)
 end
 
 function Client:get_route(args) --args(route_id)
+    
     local res=self.protocol:get('/routes/' .. args.route_id)
     return res
     
