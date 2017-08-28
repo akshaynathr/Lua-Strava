@@ -1,61 +1,142 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
+     <style>
        #map {
-        height: 400px;
+        height: 100%;
         width: 100%;
        }
     </style>
   </head>
-  <body>
-    <h3>Strava Races</h3>
-    <div id="map"></div>
-    <script>
-     var geocoder;
-var map;
-var Postcode;
 
-Postcode = '1058JA';
+  <script>
+ 
 
-function initMap() {
+
+function findAllraces2() { 
+
+
+  codeAddress("spain");
+
+  codeAddress("india");
+
+  codeAddress("USA");
+
+  codeAddress("England");
+
+  codeAddress("Indonasia");
+
+  codeAddress("Africa");
+
+  }
+var place=[];
+
+
+function findAllraces()
+{
+
+
+data=httpGet('/main');
+  
+
+ 
+  console.log(data[0]);
+   for(i=0;i<10;i++){ (codeAddress(data[i]['city'] +','+data[i]['country']));}
+
+  
+
+
+
+    // codeAddress(data[0]['city']+','+data[0]['country']);
+
+    //   codeAddress(data[1]['city']+','+data[1]['country']);
+
+
+    // codeAddress(data[2]['city']+','+data[2]['country']);
+
+
+    // codeAddress(data[3]['city']+','+data[3]['country']);
+
+
+    // codeAddress(data[4]['city']+','+data[4]['country']);
+
+
+    // codeAddress(data[5]['city']+','+data[5]['country']);
+
+
+    // codeAddress(data[6]['city']+','+data[6]['country']);
+
+
+    // codeAddress(data[7]['city']+','+data[7]['country']);
+
+
+    // codeAddress(data[8]['city']+','+data[8]['country']);
+
+    // codeAddress(data[9]['city']+','+data[9]['country']);
+
+}
+//console.log(data[0][1]);
+
+
+// for(i=0;i<data.length;i++){var arr=data[i]; console.log(arr['country']);}
+
+ function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null);
+
+    var obj=JSON.parse(xmlHttp.responseText);
+    return obj;
+}
+
+
+ 
+  function initialize() {
     geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(52.368465, 4.903921);
+    var latlng = new google.maps.LatLng(39.5, -34.734);
     var mapOptions = {
-        zoom: 1,
-        center: latlng
+      zoom: 3,
+             minZoom: 3,
+      center: latlng
     }
     map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    codeAddress();
-}
+  }
 
-function codeAddress() {
-    geocoder = new google.maps.Geocoder();
-    geocoder.geocode({'address': Postcode }, function (results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            var marker = new google.maps.Marker({
-                position: results[0].geometry.location,
-            });
-            marker.setMap(map);
-        } else {
-            document.getElementById("address").value = status;
-        }
-    });
-}
-
-//google.maps.event.addDomListener(window, 'load', initMap);
-       /* var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
+  function codeAddress(address) {
+    //var address = document.getElementById('address').value;
+   new geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
         });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });*/
-      
-    </script>
-    <script async defer
+
+
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
+  
+ // for(i=0;i<data.length;i++){ console.log(data[i]['country']); codeAddress(data[i]['country']);}
+
+
+
+ 
+</script>
+<body onload="initialize()">
+ <div id="map" style="width: auto; height: 480px;"></div>
+  <div>
+    
+    <input type="button" value="Show races" onclick="findAllraces()">
+  </div>
+</body>
+
+
+     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBm-haBD-N4RhVmr16bsI2FfipEy-fUOug&callback=initMap">
     </script>
   </body>

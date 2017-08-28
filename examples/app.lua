@@ -82,9 +82,13 @@ else return {redirect_to='/error'} end
 --    local year=2015
     client:set_access_token(self.session.token)
     local races=client:get_races({})
-    return  table.tostring(races)
+    --return  table.tostring(races)
+     return { json = races }
     end)
 
+app:get("/test.json", function(self)
+  return { json = { status = "ok" } }
+end)
 
 
 app:match("map","/map", function()
