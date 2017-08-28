@@ -36,7 +36,7 @@ function findAllraces()
 {
 
 
-data=httpGet('/main');
+data=httpGet('http://ec2-54-254-233-219.ap-southeast-1.compute.amazonaws.com:8080/main');
   
 
  
