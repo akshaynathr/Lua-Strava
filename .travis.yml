@@ -27,7 +27,7 @@ install: true
 script: true
 # Don't fail due to luacheck
 #- sh test.sh
-    lua TESTS_lua.lua 
+    - lua TESTS_lua.lua 
 
 #after_success:
 #          #  - luacov-coveralls -e $TRAVIS_BUILD_DIR/lua_install
