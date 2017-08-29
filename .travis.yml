@@ -19,12 +19,15 @@ before_install:
       - luarocks install luacheck
       - luarocks install luacov
       - luarocks install http
+      - luarocks install lua-requests
+      - luarocks install luastrava
     #  - luarocks install luacov-coveralls
 install: true
     # - luarock
 script: true
 # Don't fail due to luacheck
 #- sh test.sh
+    lua TESTS_lua.lua 
 
 #after_success:
 #          #  - luacov-coveralls -e $TRAVIS_BUILD_DIR/lua_install
