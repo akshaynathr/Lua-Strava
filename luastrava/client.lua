@@ -124,10 +124,11 @@ end
 
 function Client:get_activity(args) --args(athlete_id,include_all_efforts)
     args.include_all_efforts=args.include_all_efforts or false
+    local res
     if args.activity_id then
-        local res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=args.include_all_efforts})
+         res=self.protocol:get('/activities/' .. args.activity_id,{include_all_efforts=args.include_all_efforts})
     else 
-        local res=self.protocol:get('/activities' )
+         res=self.protocol:get('/activities' )
     end
     return res
 end
