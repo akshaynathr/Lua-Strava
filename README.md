@@ -7,10 +7,11 @@ luastrava can be installed using luarocks.
 ``` 
     luarocks install luastrava
 ```
-## Importing the library
+## Importing the library and creating a new client
 
 ``` 
-    local strava_client = require('luastrava.client').Client
+    local strava = require('luastrava.client').Client
+    local client=strava:new()
 ```
 
 ## Authentication and Authorization with Strava API
