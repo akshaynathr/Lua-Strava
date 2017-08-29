@@ -25,7 +25,8 @@ The __luastrava.client.Client__ class provides __luastrava.client.Client:authori
 ```
 local strava=require('luastrava.client').Client
 local client=strava:new()
-local url=client:authorization_url{client_id=CLIENT_ID,
+local url=client:authorization_url{client_id=CLIENT_ID,redirect_uri='http://localhost/auth',scope='write'}
+     
 redirect_uri='http://strava_app.example.com/authorization'}
 
 ```
